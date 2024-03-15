@@ -14,6 +14,7 @@ public class Variables {
     private List<TableVariable> tableVariables;
     private Map<String, BulletListVariable> bulletListVariables;
     private Map<String, ObjectVariable> objectVariables;
+    private Map<String, RenderVariable> renderVariables;
 
     public Variables() {
         this.textVariables = new HashMap<String, TextVariable>();
@@ -21,6 +22,7 @@ public class Variables {
         this.tableVariables = new ArrayList<TableVariable>();
         this.bulletListVariables = new HashMap<String, BulletListVariable>();
         this.objectVariables = new HashMap<String, ObjectVariable>();
+        this.renderVariables = new HashMap<String, RenderVariable>();
     }
 
     public TextVariable addTextVariable(TextVariable textVariable) {
@@ -51,6 +53,11 @@ public class Variables {
         return tree;
     }
 
+    public RenderVariable addRenderVariable(RenderVariable renderVariable) {
+        this.renderVariables.put(renderVariable.getKey(), renderVariable);
+        return renderVariable;
+    }
+
     public Map<String, TextVariable> getTextVariables() {
         return textVariables;
     }
@@ -69,6 +76,10 @@ public class Variables {
 
     public Map<String, ObjectVariable> getObjectVariables() {
         return objectVariables;
+    }
+
+    public Map<String, RenderVariable> getRenderVariables() {
+        return renderVariables;
     }
 
     public Variable getVariable(Key key) {
@@ -90,6 +101,8 @@ public class Variables {
             return bulletListVariables.get(key.getKey());
         case OBJECT:
             return objectVariables.get(key.getKey());
+        case RENDER:
+            return renderVariables.get(key.getKey());
         }
         return null; // TODO: throw exception
     }

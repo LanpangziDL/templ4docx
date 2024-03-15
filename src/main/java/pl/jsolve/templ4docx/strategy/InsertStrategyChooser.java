@@ -13,6 +13,7 @@ public class InsertStrategyChooser {
     private TableInsertStrategy tableInsertStrategy;
     private BulletListInsertStrategy bulletListInsertStrategy;
     private ObjectInsertStrategy objectInsertStrategy;
+    private RenderInsertStrategy renderInsertStrategy;
     private Variables variables;
 
     public InsertStrategyChooser(Variables variables, TableRowCleaner tableRowCleaner, ParagraphCleaner paragraphCleaner) {
@@ -21,6 +22,7 @@ public class InsertStrategyChooser {
         this.tableInsertStrategy = new TableInsertStrategy(variables, this, tableRowCleaner);
         this.bulletListInsertStrategy = new BulletListInsertStrategy(this, paragraphCleaner);
         this.objectInsertStrategy = new ObjectInsertStrategy();
+        this.renderInsertStrategy = new RenderInsertStrategy();
         this.variables = variables;
     }
 
@@ -40,6 +42,9 @@ public class InsertStrategyChooser {
             break;
         case OBJECT:
             objectInsertStrategy.insert(insert, variable);
+            break;
+        case RENDER:
+            renderInsertStrategy.insert(insert, variable);
             break;
         }
     }
